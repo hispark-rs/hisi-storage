@@ -1,0 +1,15 @@
+[package]
+name = "hisi-storage"
+version = "0.1.0-alpha.1"
+edition = "2024"
+description = "Chip-neutral storage contracts and bounded memory-mapped flash readers for HiSilicon embedded Rust"
+license = "MIT"
+repository = "https://github.com/hispark-rs/hisi-storage"
+keywords = ["embedded", "no-std", "storage", "flash", "hisilicon"]
+categories = ["embedded", "no-std"]
+
+[dependencies]
+embedded-storage = "0.3.1"
+
+[lints.rust]
+missing_docs = "warn"
