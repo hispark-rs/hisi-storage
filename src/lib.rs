@@ -11,6 +11,19 @@ use core::convert::Infallible;
 
 pub use embedded_storage::ReadStorage;
 
+/// Byte-addressed storage that can program previously erased bytes.
+///
+/// This contract deliberately excludes erase. Format owners can use it for
+/// append-only transactions while leaving erase and garbage collection behind
+/// a separate, explicitly unstable lifecycle.
+pub trait WriteStorage: ReadStorage {
+    /// Program `bytes` at `offset` without erasing surrounding storage.
+    ///
+    /// Implementations must report attempts to change a programmed zero bit
+    /// back to one as an error rather than silently corrupting adjacent data.
+    fn write(&mut self, offset: u32, bytes: &[u8]) -> Result<(), Self::Error>;
+}
+
 /// A read-only region backed by a byte slice.
 #[derive(Debug, Clone, Copy)]
 pub struct SliceStorage<'a> {
