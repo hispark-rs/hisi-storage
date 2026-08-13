@@ -1,6 +1,6 @@
 [package]
 name = "hisi-storage"
-version = "0.1.0-alpha.1"
+version = "0.1.0-alpha.2"
 edition = "2024"
 description = "Chip-neutral storage contracts and bounded memory-mapped flash readers for HiSilicon embedded Rust"
 license = "MIT"
