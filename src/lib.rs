@@ -24,6 +24,22 @@ pub trait WriteStorage: ReadStorage {
     fn write(&mut self, offset: u32, bytes: &[u8]) -> Result<(), Self::Error>;
 }
 
+/// Byte-addressed storage with an explicit erase lifecycle.
+///
+/// Format owners use this capability only when they can preserve their own
+/// power-loss and recovery invariants. Implementations must reject unaligned
+/// ranges rather than widening an erase into adjacent data.
+pub trait EraseStorage: WriteStorage {
+    /// Smallest independently erasable range in bytes.
+    fn erase_size(&self) -> usize;
+
+    /// Erase exactly `length` bytes beginning at `offset`.
+    ///
+    /// Both values must be aligned to [`Self::erase_size`]. On success every
+    /// byte in the requested range reads as `0xff`.
+    fn erase(&mut self, offset: u32, length: usize) -> Result<(), Self::Error>;
+}
+
 /// A read-only region backed by a byte slice.
 #[derive(Debug, Clone, Copy)]
 pub struct SliceStorage<'a> {

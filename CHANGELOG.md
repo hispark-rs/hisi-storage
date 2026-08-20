@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0-alpha.3] - 2026-08-20
+
+### Added
+
+- Add an explicit aligned `EraseStorage` capability so format owners can
+  request bounded erase operations without assuming chip geometry or silently
+  widening a write contract.
+
 ## [0.1.0-alpha.2] - 2026-08-13
 
 ### Added
